@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Api = axios.create({
     //set default endpoint API
-    baseURL: 'http://103.117.56.34:3000'
+    baseURL: 'https://api.sholatku.my.id'
 })
 
 export default Api
