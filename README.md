@@ -31,12 +31,11 @@ Digunakan untuk melakukan komunikasi dengan API backend.
    ```bash
    npm install
    ```
-4. Pastikan backend sudah berjalan. Untuk menjalankan backend, ikuti petunjuk pada [repository Express Sholatku](https://github.com/fhabibiii/express-sholatku).
-5. Jalankan server pengembangan:
+4. Jalankan server pengembangan:
    ```bash
    npm run serve
    ```
-6. Akses aplikasi pada `http://localhost:8080`.
+5. Akses aplikasi pada `http://localhost:8080`.
 
 ## Struktur Proyek
 - `src/components/`: Komponen Vue yang dapat digunakan kembali.
@@ -69,3 +68,4 @@ Program ini dilisensikan di bawah [GNU General Public License v3.0](https://www.
 
 ---
 Dibuat dengan ❤ oleh **Faqihuddin Habibi** 🍉
+
