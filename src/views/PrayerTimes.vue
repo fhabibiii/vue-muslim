@@ -57,49 +57,49 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="prayer-times text-center mt-5" v-if="prayerTimes">
+  <div class="prayer-times text-center" v-if="prayerTimes">
     <h1 class="next-prayer">{{ nextPrayer }}</h1>
     <h2 class="countdown">{{ countdown }}</h2>
     <div class="row justify-content-center">
       <div class="col-md-9">
         <div class="row">
-          <div class="col-md-4 mb-3" v-if="nextPrayer !== 'Imsak'">
+          <div class="col-md-4 mb-1" v-if="nextPrayer !== 'Imsak'">
             <div class="p-3 bg-white shadow-sm rounded">
               <p class="fw-medium fs-4">Imsak</p>
               <p class="fw-medium fs-5">{{ timings.Imsak }}</p>
             </div>
           </div>
-          <div class="col-md-4 mb-3" v-if="nextPrayer !== 'Shubuh'">
+          <div class="col-md-4 mb-1" v-if="nextPrayer !== 'Shubuh'">
             <div class="p-3 bg-white shadow-sm rounded">
               <p class="fw-medium fs-4">Shubuh</p>
               <p class="fw-medium fs-5">{{ timings.Fajr }}</p>
             </div>
           </div>
-          <div class="col-md-4 mb-3" v-if="nextPrayer !== 'Terbit'">
+          <div class="col-md-4 mb-1" v-if="nextPrayer !== 'Terbit'">
             <div class="p-3 bg-white shadow-sm rounded">
               <p class="fw-medium fs-4">Terbit</p>
               <p class="fw-medium fs-5">{{ timings.Sunrise }}</p>
             </div>
           </div>
-          <div class="col-md-4 mb-3" v-if="nextPrayer !== 'Dhuhur'">
+          <div class="col-md-4 mb-1" v-if="nextPrayer !== 'Dhuhur'">
             <div class="p-3 bg-white shadow-sm rounded">
               <p class="fw-medium fs-4">Dhuhur</p>
               <p class="fw-medium fs-5">{{ timings.Dhuhr }}</p>
             </div>
           </div>
-          <div class="col-md-4 mb-3" v-if="nextPrayer !== 'Ashar'">
+          <div class="col-md-4 mb-1" v-if="nextPrayer !== 'Ashar'">
             <div class="p-3 bg-white shadow-sm rounded">
               <p class="fw-medium fs-4">Ashar</p>
               <p class="fw-medium fs-5">{{ timings.Asr }}</p>
             </div>
           </div>
-          <div class="col-md-4 mb-3" v-if="nextPrayer !== 'Maghrib'">
+          <div class="col-md-4 mb-1" v-if="nextPrayer !== 'Maghrib'">
             <div class="p-3 bg-white shadow-sm rounded">
               <p class="fw-medium fs-4">Maghrib</p>
               <p class="fw-medium fs-5">{{ timings.Maghrib }}</p>
             </div>
           </div>
-          <div class="col-md-4 mb-3" v-if="nextPrayer !== 'Isya'">
+          <div class="col-md-4 mb-1" v-if="nextPrayer !== 'Isya'">
             <div class="p-3 bg-white shadow-sm rounded">
               <p class="fw-medium fs-4">Isya</p>
               <p class="fw-medium fs-5">{{ timings.Isha }}</p>
@@ -110,29 +110,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-<style>
-.prayer-times {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.next-prayer {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  font-family: 'Roboto', sans-serif;
-}
-
-.countdown {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  font-family: 'Roboto', sans-serif;
-}
-
-.fw-medium {
-  font-weight: 500;
-}
-</style>

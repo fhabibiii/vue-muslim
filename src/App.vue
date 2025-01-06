@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import api from './services/api'
 import Cookies from 'js-cookie'
 import iziToast from 'izitoast'
+import axios from 'axios'
 
 const router = useRouter()
 
@@ -27,9 +28,15 @@ const loginFailed = ref([])
 //state isLoggedIn
 const isLoggedIn = ref(Cookies.get('token') ? true : false)
 
-//state for selected city and prayer times
-const selectedCity = ref(Cookies.get('selectedCity') || '')
+//state for selected province, city, and prayer times
+const selectedProvince = ref('')
+const selectedCity = ref('')
 const prayerTimes = ref(null)
+const readableDate = ref('')
+
+//state for provinces and cities
+const provinces = ref([])
+const cities = ref([])
 
 //references to modals
 const registerModal = ref(null)
@@ -46,6 +53,25 @@ const showToast = (message, type) => {
     });
 }
 
+const fetchProvinces = async () => {
+    try {
+        const response = await axios.get('/wilayah-api/provinces.json')
+        provinces.value = response.data.data
+        console.log(response)
+    } catch (error) {
+        showToast('Failed to retrieve provinces!', 'danger')
+    }
+}
+
+const fetchCities = async (provinceCode) => {
+    try {
+        const response = await axios.get(`/wilayah-api/regencies/${provinceCode}.json`)
+        cities.value = response.data.data
+    } catch (error) {
+        showToast('Failed to retrieve cities!', 'danger')
+    }
+}
+
 const fetchPrayerTimes = async (showToastMessages = true) => {
     try {
         const params = {
@@ -58,6 +84,7 @@ const fetchPrayerTimes = async (showToastMessages = true) => {
         }
         const response = await api.get('/api/prayertime', { params, headers });
         prayerTimes.value = response.data.data;
+        readableDate.value = response.data.data.date.readable;
         if (showToastMessages) {
             showToast('Prayer times retrieved successfully!', 'success');
         }
@@ -137,6 +164,14 @@ const logout = () => {
     router.push({ name: 'home' })
 }
 
+// Watch for changes in selectedProvince and fetch cities
+watch(selectedProvince, (newProvince) => {
+    if (newProvince) {
+        fetchCities(newProvince);
+        selectedCity.value = ''; // Reset selected city
+    }
+});
+
 // Watch for changes in selectedCity and fetch prayer times
 watch(selectedCity, (newCity) => {
     if (newCity) {
@@ -145,8 +180,9 @@ watch(selectedCity, (newCity) => {
     }
 });
 
-// Fetch prayer times on mount if logged in
+// Fetch provinces on mount
 onMounted(() => {
+    fetchProvinces();
     if (isLoggedIn.value) {
         const user = JSON.parse(Cookies.get('user'));
         selectedCity.value = Cookies.get('selectedCity') || user.city || 'Jakarta';
@@ -161,7 +197,7 @@ onMounted(() => {
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <!-- Bagian Kiri -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand d-flex align-items-center" href="#">
           <img src="/assets/logo.png" alt="logo" width="50" height="auto">
         </a>
 
@@ -174,9 +210,16 @@ onMounted(() => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Konten di sisi kanan -->
           <div class="ms-auto d-flex align-items-center">
-            <select v-model="selectedCity" class="form-select me-2" aria-label="Pilih Kota/Kabupaten">
-              <option v-for="city in cities" :key="city" :value="city">
-                {{ city }}
+            <select v-model="selectedProvince" class="form-select me-2 flex-select" aria-label="Pilih Provinsi">
+              <option value="" disabled>Pilih Provinsi</option>
+              <option v-for="province in provinces" :key="province.code" :value="province.code">
+                {{ province.name }}
+              </option>
+            </select>
+            <select v-model="selectedCity" class="form-select me-2 flex-select" aria-label="Pilih Kota/Kabupaten" :disabled="!selectedProvince">
+              <option value="" disabled>Pilih Kota/Kabupaten</option>
+              <option v-for="city in cities" :key="city.code" :value="city.name">
+                {{ city.name }}
               </option>
             </select>
             <template v-if="isLoggedIn">
@@ -259,8 +302,13 @@ onMounted(() => {
     </div>
 
     <!--- render router view -->
-    <div class="mt-5">
+    <div class="mt-2">
       <router-view :prayer-times="prayerTimes"></router-view>
+    </div>
+
+    <!-- Tanggal dan Kota -->
+    <div class="text-center mb-1">
+      <p class="date-city">{{ readableDate }} - {{ selectedCity }}</p>
     </div>
 </template>
 
@@ -268,12 +316,11 @@ onMounted(() => {
 export default {
   data() {
     return {
-      cities: ["Jakarta", "Surabaya", "Bandung", "Yogyakarta", "Sragen", "Semarang", "Solo", "Bali", "Lombok", "Nabire", "Makassar"],
+      provinces: [],
+      cities: [],
+      selectedProvince: "",
       selectedCity: "",
     };
   },
 };
 </script>
-
-<style>
-</style>

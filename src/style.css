@@ -1,0 +1,67 @@
+  .prayer-times {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .next-prayer {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .countdown {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .fw-medium {
+    font-weight: 500;
+  }
+  
+  .flex-select {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .date-city {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .prayer-times {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .next-prayer {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .countdown {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .fw-medium {
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .date-city {
+      font-size: 1.2rem;
+    }
+  
+    .flex-select {
+      max-width: 100%;
+    }
+  }
