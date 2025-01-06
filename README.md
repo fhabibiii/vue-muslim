@@ -7,6 +7,7 @@ Vue Sholatku adalah frontend dari website [sholatku.my.id](https://sholatku.my.i
 2. **Jadwal Sholat**: Menampilkan jadwal sholat berdasarkan kota dan tanggal.
 3. **Hitung Mundur**: Fitur hitung mundur untuk waktu sholat berikutnya.
 4. **Autentikasi Pengguna**: Kemampuan untuk login dan menyimpan preferensi lokasi pengguna.
+5. **Pemilihan Lokasi**: Dropdown untuk memilih provinsi dan kota yang diambil dari API `wilayah.id`.
 
 ## Teknologi yang Digunakan
 ### 1. **Vue.js**
@@ -16,7 +17,16 @@ Vue.js digunakan sebagai framework utama untuk membangun antarmuka pengguna yang
 Bootstrap 5 menyediakan komponen dan grid sistem untuk tata letak yang konsisten dan mobile-first.
 
 ### 3. **Axios**
-Digunakan untuk melakukan komunikasi dengan API backend.
+Digunakan untuk melakukan komunikasi dengan API backend dan API `wilayah.id`.
+
+### 4. **Vite**
+Vite digunakan sebagai build tool dan server pengembangan untuk proyek ini.
+
+### 5. **IziToast**
+IziToast digunakan untuk menampilkan notifikasi toast yang interaktif.
+
+### 6. **JS Cookie**
+JS Cookie digunakan untuk mengelola cookie di aplikasi.
 
 ## Cara Menjalankan Proyek
 1. Clone repository ini:
@@ -33,22 +43,22 @@ Digunakan untuk melakukan komunikasi dengan API backend.
    ```
 4. Jalankan server pengembangan:
    ```bash
-   npm run serve
+   npm run dev
    ```
-5. Akses aplikasi pada `http://localhost:8080`.
+5. Akses aplikasi pada `http://localhost:5173`.
 
 ## Struktur Proyek
-- `src/components/`: Komponen Vue yang dapat digunakan kembali.
 - `src/views/`: Halaman utama aplikasi.
 - `src/router/`: Definisi routing aplikasi.
 - `src/assets/`: Sumber daya statis seperti gambar dan stylesheet.
-- `src/store/`: State management menggunakan Vuex (jika digunakan).
+- `src/services/`: Konfigurasi API untuk komunikasi dengan backend
+- `src/style.css`: Gaya kustom untuk aplikasi.
 
 ## Fitur dan Penggunaan
 ### 1. Navbar
 Navbar mencakup:
 - **Logo** di sisi kiri.
-- **Dropdown pencarian lokasi** untuk memilih kota atau distrik.
+- **Dropdown pencarian lokasi** untuk memilih provinsi dan kota.
 - **Tombol Login/Register** yang membuka modal autentikasi.
 
 ### 2. Jadwal Sholat
@@ -58,7 +68,7 @@ Menampilkan informasi berikut:
 - Hitung mundur ke waktu sholat berikutnya.
 
 ### 3. Autentikasi Pengguna
-Pengguna dapat login untuk menyimpan data lokasi secara personal dan mengurangi permintaan API berulang.
+Pengguna dapat login untuk menyimpan data lokasi secara personal.
 
 ### 4. Responsif
 Aplikasi dioptimalkan untuk berbagai ukuran layar, dari perangkat mobile hingga desktop.
